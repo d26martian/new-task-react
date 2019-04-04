@@ -1,0 +1,8 @@
+.App {
+  text-align: center;
+  width: 600px;
+  margin: 0 auto;
+}
+input:focus {
+  outline: 0;
+}
