@@ -1,6 +1,9 @@
 import React, { Component } from "react";
+
 import FormTasks from "./FormTasks";
 import Task from "./Task";
+//import ControlBtn from "./ControlBtn";
+
 import styled from "styled-components";
 
 const Wraper = styled.div`
@@ -10,16 +13,21 @@ const Wraper = styled.div`
     margin: 3rem 0;
   }
   .blockBtn {
-    display: table-caption;
-    top: -1rem;
-    position: relative;
+    margin: 2rem 0;
+  }
+  .blockBtn button {
+    height: 40px;
+    border: 2px solid #eee;
+  }
+  button:focus,
+  button:active {
+    border: 0;
+    outline: none;
   }
   button {
     width: 100px;
-    height: 40px;
     border: 0;
     background: #9085bd;
-    margin: 2px 0;
     text-transform: uppercase;
     color: #fff;
   }
@@ -57,8 +65,7 @@ class TasksList extends Component {
       tasks: this.state.tasks.filter(task => task.id !== id)
     });
   };
-
-  updateTAskToShow = s => {
+  updateTaskToShow = s => {
     this.setState({
       taskShow: s
     });
@@ -79,27 +86,30 @@ class TasksList extends Component {
         <div className="count">
           <div>Count tasks: {this.state.tasks.length}</div>
           <div>
-            Active tasks:{" "}
+            Active tasks:
             {this.state.tasks.filter(task => !task.complete).length}
           </div>
         </div>
         <FormTasks onClick={this.addTask} />
-        {tasks.map(task => (
-          <Task
-            key={task.id}
-            task={task}
-            toggleComplete={() => this.toggleComplete(task.id)}
-            onDelete={() => this.handleDeleteTask(task.id)}
-          />
-        ))}
+
         <div className="blockBtn">
-          <button onClick={() => this.updateTAskToShow("all")}>All</button>
-          <button onClick={() => this.updateTAskToShow("active")}>
+          <button onClick={() => this.updateTaskToShow("all")}>All</button>
+          <button onClick={() => this.updateTaskToShow("active")}>
             Active
           </button>
-          <button onClick={() => this.updateTAskToShow("complete")}>
+          <button onClick={() => this.updateTaskToShow("complete")}>
             Complete
           </button>
+        </div>
+        <div className="wrapTask">
+          {tasks.map(task => (
+            <Task
+              key={task.id}
+              task={task}
+              toggleComplete={() => this.toggleComplete(task.id)}
+              onDelete={() => this.handleDeleteTask(task.id)}
+            />
+          ))}
         </div>
       </Wraper>
     );

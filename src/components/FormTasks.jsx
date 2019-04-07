@@ -28,6 +28,7 @@ class FormTasks extends Component {
   };
 
   inputTaskRef = React.createRef();
+
   handleChenge = () => {
     this.setState({
       textInputTask: this.inputTaskRef.current.value
@@ -65,7 +66,6 @@ class FormTasks extends Component {
             </button>
           </div>
         </form>
-        <h3 className="textView">{textInputTask}</h3>
       </Wraper>
     );
   }
